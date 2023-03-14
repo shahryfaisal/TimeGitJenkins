@@ -25,14 +25,16 @@ public class Time
     {
         try
         {
-
-            String time = JOptionPane.showInputDialog(null,
-                    "Enter a time in the format hh:mm:ss", "Enter Time",
-                    JOptionPane.QUESTION_MESSAGE);
-
-
             int totalSeconds = getTotalSeconds("10:10:10");
-            System.out.println("Total Seconds = "+totalSeconds);
+            System.out.println("Github Total Seconds = "
+                    +totalSeconds);
+//            String time = JOptionPane.showInputDialog(null,
+//                    "Enter a time in the format hh:mm:ss", "Enter Time",
+//                    JOptionPane.QUESTION_MESSAGE);
+//
+//
+//            int totalSeconds = getTotalSeconds("10:10:10");
+//            System.out.println("Total Seconds = "+totalSeconds);
 
 
         }
@@ -83,7 +85,24 @@ public class Time
     {
         return Integer.parseInt(time.substring(0,2));
     }
+    public static int getMilliseconds(String time){
+        int count=0;
+        if (time.length()>12)
+        {
+            throw new NumberFormatException("your time was too long!");
+        }
+        for(int i=time.length()-3; i<time.length(); i++){
+            count = count*10 +Integer.parseInt(time.charAt(i)+"");
+        }
+        return count;
+    }
+    public static int getTotalMilliSeconds(String time)throws NumberFormatException, StringIndexOutOfBoundsException {
 
+
+        int seconds = getTotalSeconds(time);
+        int milliseconds = getMilliseconds(time);
+        return seconds*1000 + milliseconds;
+    }
 }
 
 
